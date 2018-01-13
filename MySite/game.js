@@ -74,10 +74,10 @@
     // плавали туда сюда как целое
     var Invader = function(game,position){
         this.game =game;
-        this.size ={width:20,height:20};
+        this.size ={width:10,height:10};
         this.position = position;
         this.patrolx=0;
-        this.speedx=3;  
+        this.speedx=4;  
     }
     Invader.prototype = {
         // когда заходят за рамки чтобы меняли направление на противоположное
@@ -173,9 +173,9 @@
     // цикла и функции инициализации
     var createInvaders = function(game){
         var invaders = [];
-        for(var i =0;i<210;i++){
-            var x =30 +(i%30)*30;
-            var y =30 +(i%7)*30;
+        for(var i =0;i<10;i++){
+            var x =50 +(i%5)*50;
+            var y =50 +(i%2)*50;
             // добавляем в массив нового врага
             invaders.push(new Invader(game,{x:x,y:y}));
 
