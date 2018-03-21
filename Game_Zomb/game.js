@@ -8,8 +8,15 @@
             x: canvas.width,
             y: canvas.height
         };
+        this.animate_number_enemies=0;
         this.amount_kill=0;
         this.amount_kill_all=0;
+        this.image_enemies=[];
+        for (var i=0;i<22;i++){
+        
+        this.image_enemies[i]=new Image();
+        this.image_enemies[i].src ="gif_enemy/"+i+".png"
+        }
         this.btnNew = document.getElementById('btnNew');
         var btnPause = document.getElementById("btnPause");
         var spanScored = document.getElementById("spanShowScore");
@@ -18,7 +25,7 @@
         this.btnNew.onclick =window.onload;
         this.selectDiff = selectDiff;
         
-        this.amount_enemies = 10;
+        this.amount_enemies = 100;
        // var image_zone = new Image();
         //image_zone.src = "zone_2.png";
         //screen.fillStyle = image_zone;
@@ -63,7 +70,8 @@
             console.log(this.bodies.length);
             var bodies = this.bodies;
             var enemies = this.enemies;
-
+            
+           
         
             // провяряем врезались они в друг друга или нет
             // проверяет для каждого прогоняет весь массив и если хотя бы один элемент нашелся не 
@@ -116,11 +124,15 @@
             image_hero.src= "Hero.png";
             drawImage(screen,this.bodies[0],image_hero);
             for(var i =1;i<this.bodies.length; i++){
-                drawRect(screen,this.bodies[i],"rgba(41, 73, 255,1)");
+                drawRect(screen,this.bodies[i],"rgba(0, 0, 0,1)");
             }
-            var image_enemy = new Image();
-            image_enemy.src = "enemy_2.png";
             
+            //var image_enemy = new Image();
+           // image_enemy.src = "enemy_3.gif";
+            this.animate_number_enemies=(this.animate_number_enemies+1)%22;
+            image_enemy = this.image_enemies[this.animate_number_enemies];
+            //var image_enemy = new Image();
+            //image_enemy.src = "enemy_3.gif";
             for(var i =0;i<this.enemies.length; i++){
                 //drawRect(screen,this.enemies[i],"rgba(116, 117, 117, 0.5)")
                 drawImage(screen,this.enemies[i],image_enemy);
@@ -147,7 +159,7 @@
     // плавали туда сюда как целое
     var Invader = function(game,position){
         this.game =game;
-        this.size ={width:30,height:30};
+        this.size ={width:40,height:40};
         this.position = position;
         this.patrolx=0;
         this.speedx=Math.random()+0.1;  
@@ -191,7 +203,7 @@
         // счетчики для пуль по времени и по количеству
         this.bullets =0;
         this.timer =0;
-        this.size = {width:30,height:30};
+        this.size = {width:20,height:20};
         // появляемся по середине
         this.position = {x:gameSize.x/2 -this.size.width/2, y: gameSize.y/2- this.size.height/2};
         this.keyboarder = new Keyboarder();
@@ -214,7 +226,7 @@
             // выпускаем по пять пуль
             if(this.keyboarder.isDown(this.keyboarder.KEYS.UP_FIRE)){
                 if(this.bullets<5) {
-                    var bullet = new Bullet({x:this.position.x +this.size.width/2-3/2,y:this.position.y-this.size.height/2},{x:0,y:-20});
+                    var bullet = new Bullet({x:this.position.x +this.size.width/2-3/2,y:this.position.y-this.size.height/2},{x:0,y:-30});
                     this.game.addBody(bullet);
                     this.bullets++;
                     this.game.shootSound.load();
@@ -223,7 +235,7 @@
             }
             if(this.keyboarder.isDown(this.keyboarder.KEYS.DOWN_FIRE)){
                 if(this.bullets<5) {
-                    var bullet = new Bullet({x:this.position.x +this.size.width/2,y:this.position.y+this.size.height},{x:0,y:20});
+                    var bullet = new Bullet({x:this.position.x +this.size.width/2,y:this.position.y+this.size.height},{x:0,y:30});
                     this.game.addBody(bullet);
                     this.bullets++;
                     this.game.shootSound.load();
@@ -232,7 +244,7 @@
             }
             if(this.keyboarder.isDown(this.keyboarder.KEYS.LEFT_FIRE)){
                 if(this.bullets<5) {
-                    var bullet = new Bullet({x:this.position.x ,y:this.position.y+this.size.height/2},{x:-20,y:0});
+                    var bullet = new Bullet({x:this.position.x ,y:this.position.y+this.size.height/2},{x:-30,y:0});
                     this.game.addBody(bullet);
                     this.bullets++;
                     this.game.shootSound.load();
@@ -241,7 +253,7 @@
             }
             if(this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT_FIRE)){
                 if(this.bullets<5) {
-                    var bullet = new Bullet({x:this.position.x +this.size.width,y:this.position.y+this.size.height/2},{x:20,y:0});
+                    var bullet = new Bullet({x:this.position.x +this.size.width,y:this.position.y+this.size.height/2},{x:30,y:0});
                     this.game.addBody(bullet);
                     this.bullets++;
                     this.game.shootSound.load();
@@ -257,7 +269,7 @@
     }
     // характеристики пуль
     var Bullet = function(position , velocity) {
-        this.size = {width:2,height:2};
+        this.size = {width:3,height:3};
         this.position = position;
         this.velocity = velocity;
     }
