@@ -1,0 +1,31 @@
+body  {
+    background: rgb(8, 8, 8);
+}
+canvas {
+    background:url(zone_2.png); 
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: block;
+    margin:5px;
+    opacity: 1;
+}
+nav
+{
+    float: right;
+    width:33.33%;
+    margin:5px 0px;
+}
+aside
+{
+    width:100%;
+    text-align: right;
+    margin:0.5px 0px;
+    font-size:8px;
+    color:black;
+    background-color:#aaa;
+    float:left;
+}
+span{
+
+    color:rgb(255, 255, 255);
+}
