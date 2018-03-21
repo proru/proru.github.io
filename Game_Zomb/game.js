@@ -56,7 +56,7 @@
            this.spanScored.innerHTML =this.amount_kill_all*2+this.amount_kill;
            if(this.enemies.length==0){
             this.amount_kill_all+=this.amount_enemies;
-            this.amount_enemies+=5;
+            this.amount_enemies=this.amount_enemies*2;
             this.enemies = createInvaders(this);
            }
                 
@@ -291,11 +291,11 @@
         var invaders = [];
         amount_enemies=game.amount_enemies;
         for(var i =0;i<amount_enemies;i++){
-            var x =1000*Math.random();
+            var x =800*Math.random();
             var y =600;
             // добавляем в массив нового врага
             invaders.push(new Invader(game,{x:x,y:y}));
-            var x =1000*Math.random();
+            var x =800*Math.random();
             var y =50*Math.random();
             invaders.push(new Invader(game,{x:x,y:y}));
         }
